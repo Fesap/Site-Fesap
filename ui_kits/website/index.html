@@ -36,6 +36,7 @@ const PHOTOS = {
   statue: '../../assets/photos/statue-saint-antoine.png',
   eveque1: '../../assets/photos/rencontre-eveque-1.jpg',
   eveque2: '../../assets/photos/rencontre-eveque-2.jpg',
+  priereMontreal: '../../assets/photos/priere-montreal.jpg',
 };
 
 // ---------- Contenu géré par l'administrateur (via /admin) ----------
@@ -612,7 +613,7 @@ function MontrealPrayerSection() {
   return (
     <section data-screen-label="Prière à Montréal" id="priere-montreal" style={{ scrollMarginTop: 76, background: 'var(--color-surface-sunken)' }}>
       <div style={{ maxWidth: 1160, margin: '0 auto', padding: '80px 40px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
-        <Photo src={PHOTOS.choeurPriere} alt="Rencontre de prière" style={{ height: 360 }} />
+        <Photo src={PHOTOS.priereMontreal} alt="Rencontre de prière à Montréal" style={{ height: 360 }} />
         <div>
           <div style={{ font: 'var(--text-label-md)', letterSpacing: 'var(--tracking-label)', textTransform: 'uppercase', color: 'var(--color-accent)', marginBottom: 12 }}>
             Vie de prière — Canada
