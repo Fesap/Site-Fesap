@@ -17,13 +17,20 @@ collections:
     delete: true
     format: "json"
     extension: "json"
-    slug: "{{date}}-{{slug}}"
-    summary: "{{date}} — {{titre}}"
+    slug: "{{titre}}"
+    summary: "{{titre}}"
     fields:
       - { label: "Titre", name: "titre", widget: "string" }
-      - { label: "Date", name: "date", widget: "date", format: "YYYY-MM-DD" }
+      - label: "Dates"
+        name: "dates"
+        widget: "list"
+        required: true
+        min: 1
+        summary: "{{fields.date}}"
+        field: { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false, date_format: "DD/MM/YYYY" }
       - { label: "Lieu", name: "lieu", widget: "string", required: false }
       - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Affiche ou photo (facultatif)", name: "image", widget: "image", required: false }
 
   - name: "pensees"
     label: "Pensées"
@@ -40,7 +47,8 @@ collections:
       - { label: "Titre (facultatif)", name: "titre", widget: "string", required: false }
       - { label: "Texte", name: "texte", widget: "text" }
       - { label: "Auteur ou référence (facultatif)", name: "auteur", widget: "string", required: false }
-      - { label: "Date", name: "date", widget: "date", format: "YYYY-MM-DD" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false, date_format: "DD/MM/YYYY" }
+      - { label: "Image (facultatif)", name: "image", widget: "image", required: false }
 
   - name: "galerie"
     label: "Galerie de photos"
