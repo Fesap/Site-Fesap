@@ -558,6 +558,11 @@ function EventsSection() {
                     <Icon name="calendar" size={14} color="var(--color-text-muted)" />{formatDatesFr(e._dates)}
                   </div>
                 )}
+                {e.heure && (
+                  <div style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
+                    <Icon name="clock" size={14} color="var(--color-text-muted)" />{e.heure}
+                  </div>
+                )}
                 {e.lieu && (
                   <div style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: 6 }}>
                     <Icon name="map-pin" size={14} color="var(--color-text-muted)" />{e.lieu}
