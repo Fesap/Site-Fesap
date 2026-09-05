@@ -78,6 +78,38 @@ function Photo({ src, alt, style, position = 'center', fit = 'cover' }) {
   );
 }
 
+// ---------- Bandeau : rendez-vous hebdomadaire (Canada) ----------
+const MEETING_ADDRESS = "Église Sainte-Thérèse-de-l'Enfant-Jésus, 8200 Rue St-Hubert, Montréal, QC H2P 1Z2";
+const MEETING_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MEETING_ADDRESS)}`;
+
+function MeetingBanner() {
+  return (
+    <div style={{
+      background: 'var(--color-accent)', color: '#fff', padding: '10px 20px',
+      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px 16px', flexWrap: 'wrap',
+      textAlign: 'center', font: 'var(--text-body-sm)',
+    }}>
+      <Icon name="calendar" size={16} color="#fff" />
+      <span>
+        <strong>Canada — Montréal :</strong> rencontre de prière tous les vendredis à 19&nbsp;h,
+        Église Sainte-Thérèse-de-l'Enfant-Jésus, 8200 rue St-Hubert
+      </span>
+      <a
+        href={MEETING_MAPS_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          display: 'inline-flex', alignItems: 'center', gap: 6, color: '#fff', textDecoration: 'underline',
+          fontWeight: 700, whiteSpace: 'nowrap',
+        }}
+      >
+        <Icon name="map-pin" size={14} color="#fff" />
+        Voir l'itinéraire
+      </a>
+    </div>
+  );
+}
+
 // ---------- Header ----------
 function Header({ active, onNav }) {
   const links = [
@@ -633,6 +665,7 @@ function App() {
 
   return (
     <div>
+      <MeetingBanner />
       <Header active={active} onNav={handleNav} />
       <HomeSection />
       <EventsSection />
