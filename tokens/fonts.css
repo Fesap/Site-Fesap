@@ -1,0 +1,7 @@
+/* FESAP — Webfonts
+   No brand font files were supplied with the flyer brief. Substituting the
+   closest Google Fonts matches called out in the charte graphique itself:
+   Playfair Display (display serif), Montserrat (heading/label sans), Inter (body).
+   FLAG: if FESAP has official brand font files, replace this @import with local
+   @font-face + binaries and update tokens/typography.css accordingly. */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,600&family=Montserrat:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap');

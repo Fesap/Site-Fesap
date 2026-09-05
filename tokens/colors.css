@@ -1,0 +1,55 @@
+/* FESAP — Color tokens
+   Base palette extracted/estimated from the institutional flyer (charte graphique),
+   plus semantic aliases for web use. See readme.md for sourcing notes. */
+:root {
+  /* Base brand colors */
+  --fesap-green-900: #123423;   /* primary hover/pressed */
+  --fesap-green-700: #1C4B33;   /* primary — forest green (logo ring, titles, badges) */
+  --fesap-green-600: #245C40;
+  --fesap-green-100: #E4EDE8;   /* tint for soft backgrounds */
+
+  --fesap-brown-900: #2B1A0D;
+  --fesap-brown-700: #3C2413;   /* secondary — espresso brown (banners, footer) */
+  --fesap-brown-500: #5C4636;
+
+  --fesap-copper-500: #B8804A; /* accent — copper/bronze */
+  --fesap-copper-300: #D3A87A;
+
+  --fesap-flame-500: #E8622E;  /* flame orange — used sparingly for secondary CTAs */
+  --fesap-flame-700: #C73E1D;  /* flame gradient base */
+
+  --fesap-cream-050: #FCFAF7;  /* main background */
+  --fesap-white: #FFFFFF;
+  --fesap-ink-900: #1A1A1A;    /* primary text */
+  --fesap-ink-600: #5C5652;    /* muted text */
+  --fesap-ink-border: #E4DFD8; /* discreet dividers */
+
+  /* Social brand colors — do not alter, these are third-party marks */
+  --social-whatsapp: #25D366;
+  --social-facebook: #1877F2;
+  --social-youtube: #FF0000;
+  --social-tiktok: #000000;
+
+  /* Semantic aliases */
+  --color-primary: var(--fesap-green-700);
+  --color-primary-hover: var(--fesap-green-900);
+  --color-secondary: var(--fesap-brown-700);
+  --color-secondary-hover: var(--fesap-brown-900);
+  --color-accent: var(--fesap-copper-500);
+  --color-flame: var(--fesap-flame-500);
+
+  --color-bg: var(--fesap-cream-050);
+  --color-surface: var(--fesap-white);
+  --color-surface-sunken: var(--fesap-green-100);
+
+  --color-text: var(--fesap-ink-900);
+  --color-text-muted: var(--fesap-ink-600);
+  --color-text-on-primary: var(--fesap-white);
+  --color-text-on-secondary: #F3E9DE;
+  --color-text-accent: var(--fesap-copper-500);
+
+  --color-border: var(--fesap-ink-border);
+  --color-border-strong: var(--fesap-green-700);
+
+  --color-focus-ring: var(--fesap-copper-500);
+}

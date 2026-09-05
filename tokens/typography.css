@@ -1,0 +1,23 @@
+/* FESAP — Typography tokens */
+:root {
+  --font-display: 'Playfair Display', Georgia, serif;   /* solemn display serif — hero titles */
+  --font-heading: 'Montserrat', sans-serif;              /* bold uppercase labels/subtitles */
+  --font-body: 'Inter', 'Open Sans', sans-serif;         /* running text */
+
+  /* Display scale (hero / section titles, Playfair Display) */
+  --text-display-xl: 700 56px/1.08 var(--font-display);
+  --text-display-lg: 700 44px/1.1 var(--font-display);
+  --text-display-md: 700 32px/1.15 var(--font-display);
+
+  /* Heading scale (Montserrat, labels/eyebrows — usually uppercase + tracked) */
+  --text-label-lg: 700 18px/1.3 var(--font-heading);
+  --text-label-md: 700 14px/1.4 var(--font-heading);
+  --text-label-sm: 700 12px/1.4 var(--font-heading);
+  --tracking-label: 0.08em;
+
+  /* Body scale (Inter) */
+  --text-body-lg: 400 19px/1.6 var(--font-body);
+  --text-body-md: 400 16px/1.65 var(--font-body);
+  --text-body-sm: 400 14px/1.55 var(--font-body);
+  --text-body-strong: 600 16px/1.6 var(--font-body);
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>FESAP</title>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+<p>Redirection vers <a href="ui_kits/website/index.html">le site FESAP</a>...</p>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", function (user) {
+      if (!user) {
+        window.netlifyIdentity.on("login", function () {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+  var hash = window.location.hash || "";
+  var isIdentityLink = ["invite_token", "confirmation_token", "recovery_token", "access_token"]
+    .some(function (key) { return hash.indexOf(key) !== -1; });
+  if (!isIdentityLink) {
+    window.location.replace("ui_kits/website/index.html");
+  }
+</script>
+</body>
+</html>

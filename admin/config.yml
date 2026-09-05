@@ -1,0 +1,52 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: "fr"
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "activites"
+    label: "Programme d'activités"
+    label_singular: "Activité"
+    description: "Les événements à venir affichés en haut du site."
+    folder: "content/activites"
+    create: true
+    delete: true
+    slug: "{{date}}-{{slug}}"
+    summary: "{{date}} — {{titre}}"
+    fields:
+      - { label: "Titre", name: "titre", widget: "string" }
+      - { label: "Date", name: "date", widget: "date", format: "YYYY-MM-DD" }
+      - { label: "Lieu", name: "lieu", widget: "string", required: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+
+  - name: "pensees"
+    label: "Pensées"
+    label_singular: "Pensée"
+    description: "Réflexions et pensées spirituelles affichées sur le site."
+    folder: "content/pensees"
+    create: true
+    delete: true
+    slug: "{{date}}-{{slug}}"
+    summary: "{{titre}}"
+    fields:
+      - { label: "Titre (facultatif)", name: "titre", widget: "string", required: false }
+      - { label: "Texte", name: "texte", widget: "text" }
+      - { label: "Auteur ou référence (facultatif)", name: "auteur", widget: "string", required: false }
+      - { label: "Date", name: "date", widget: "date", format: "YYYY-MM-DD" }
+
+  - name: "galerie"
+    label: "Galerie de photos"
+    label_singular: "Photo"
+    description: "Photos ajoutées à la galerie du site."
+    folder: "content/galerie"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    summary: "{{legende}}"
+    fields:
+      - { label: "Photo", name: "image", widget: "image" }
+      - { label: "Légende", name: "legende", widget: "string", required: false }
