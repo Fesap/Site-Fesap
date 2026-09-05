@@ -388,7 +388,7 @@ function WorldMap({ active, onSelect }) {
 }
 
 function CommunitiesSection() {
-  const [tab, setTab] = React.useState('ouaga');
+  const [tab, setTab] = React.useState('canada');
   const data = {
     ouaga: {
       badge: 'Ouagadougou', title: 'Paroisse de Dassasgho, siège social',
@@ -418,7 +418,7 @@ function CommunitiesSection() {
         <WorldMap active={tab} onSelect={setTab} />
 
         <Tabs
-          items={[{ label: 'Ouagadougou', value: 'ouaga' }, { label: 'Banfora', value: 'banfora' }, { label: 'Canada', value: 'canada' }]}
+          items={[{ label: 'Canada', value: 'canada' }, { label: 'Ouagadougou', value: 'ouaga' }, { label: 'Banfora', value: 'banfora' }]}
           active={tab}
           onChange={setTab}
           style={{ margin: '28px 0 32px' }}
@@ -462,7 +462,7 @@ function ActivitiesSection() {
   const [filter, setFilter] = React.useState('tous');
   const items = [
     { icon: 'book-open', title: 'Enseignement et formation', cat: 'formation', desc: "Insertion sociale des jeunes, des filles déscolarisées et des personnes marginalisées." },
-    { icon: 'flame', title: "Ministère d'intercession", cat: 'priere', desc: "Un espace de prière fervente, d'exercice de la vie antonienne et d'accompagnement spirituel." },
+    { icon: 'flame', title: "Ministère d'intercession", cat: 'priere', desc: "Rencontre de prière tous les vendredis à 19 h, Église Sainte-Thérèse-de-l'Enfant-Jésus, 8200 rue St-Hubert, Montréal." },
     { icon: 'users', title: 'Ministère Compassion', cat: 'communaute', desc: "Œuvre sociale et caritative envers les démunis, les malades et les prisonniers." },
     { icon: 'heart', title: 'Ministère femme sainte Esther', cat: 'service', desc: "Un espace d'évangélisation auprès des femmes, pour mieux faire connaître leur place dans la société." },
     { icon: 'music-2', title: 'Chœur Kéroubim', cat: 'communaute', desc: "La Voix des Chérubins : un ministère de louange et d'adoration prophétique, au service de l'évangélisation par le chant." },
