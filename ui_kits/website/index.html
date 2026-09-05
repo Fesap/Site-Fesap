@@ -462,7 +462,7 @@ function ActivitiesSection() {
   const [filter, setFilter] = React.useState('tous');
   const items = [
     { icon: 'book-open', title: 'Enseignement et formation', cat: 'formation', desc: "Insertion sociale des jeunes, des filles déscolarisées et des personnes marginalisées." },
-    { icon: 'flame', title: "Ministère d'intercession", cat: 'priere', desc: "Rencontre de prière tous les vendredis à 19 h, Église Sainte-Thérèse-de-l'Enfant-Jésus, 8200 rue St-Hubert, Montréal." },
+    { icon: 'flame', title: "Ministère d'intercession", cat: 'priere', desc: "Un espace de prière fervente, d'exercice de la vie antonienne et d'accompagnement spirituel." },
     { icon: 'users', title: 'Ministère Compassion', cat: 'communaute', desc: "Œuvre sociale et caritative envers les démunis, les malades et les prisonniers." },
     { icon: 'heart', title: 'Ministère femme sainte Esther', cat: 'service', desc: "Un espace d'évangélisation auprès des femmes, pour mieux faire connaître leur place dans la société." },
     { icon: 'music-2', title: 'Chœur Kéroubim', cat: 'communaute', desc: "La Voix des Chérubins : un ministère de louange et d'adoration prophétique, au service de l'évangélisation par le chant." },
@@ -542,34 +542,31 @@ function EventsSection() {
         <div style={{ font: 'var(--text-label-md)', letterSpacing: 'var(--tracking-label)', textTransform: 'uppercase', color: 'var(--color-accent)', marginBottom: 32 }}>
           Événements
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           {sorted.map((e, i) => (
-            <Card key={i} style={{ display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
-              <div style={{ font: 'var(--text-label-md)', color: '#fff', background: 'var(--color-primary)', borderRadius: 'var(--radius-md)', padding: '10px 16px', textAlign: 'center', letterSpacing: 'var(--tracking-label)', flexShrink: 0 }}>
-                {formatDateFr(e._dates[0])}
-              </div>
+            <Card key={i} style={{ display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'flex-start' }}>
               {e.image && (
-                <img src={e.image} alt={e.titre} style={{ width: 64, height: 64, borderRadius: 'var(--radius-md)', objectFit: 'cover', flexShrink: 0 }} />
+                <Photo src={e.image} alt={e.titre} style={{ width: 180, height: 220, flexShrink: 0 }} />
               )}
-              <div style={{ flex: '1 1 200px' }}>
-                <div style={{ font: 'var(--text-body-strong)', color: 'var(--color-text)', marginBottom: 4 }}>{e.titre}</div>
-                {e._dates.length > 1 && (
-                  <div style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
+              <div style={{ flex: '1 1 260px' }}>
+                <div style={{ font: 'var(--text-display-md)', color: 'var(--color-primary)', marginBottom: 10 }}>{e.titre}</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 12 }}>
+                  <div style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: 6 }}>
                     <Icon name="calendar" size={14} color="var(--color-text-muted)" />{formatDatesFr(e._dates)}
                   </div>
-                )}
-                {e.heure && (
-                  <div style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
-                    <Icon name="clock" size={14} color="var(--color-text-muted)" />{e.heure}
-                  </div>
-                )}
-                {e.lieu && (
-                  <div style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Icon name="map-pin" size={14} color="var(--color-text-muted)" />{e.lieu}
-                  </div>
-                )}
+                  {e.heure && (
+                    <div style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <Icon name="clock" size={14} color="var(--color-text-muted)" />{e.heure}
+                    </div>
+                  )}
+                  {e.lieu && (
+                    <div style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <Icon name="map-pin" size={14} color="var(--color-text-muted)" />{e.lieu}
+                    </div>
+                  )}
+                </div>
                 {e.description && (
-                  <div style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', marginTop: 4 }}>{e.description}</div>
+                  <div style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', whiteSpace: 'pre-line', lineHeight: 1.7 }}>{e.description}</div>
                 )}
               </div>
             </Card>
@@ -604,6 +601,38 @@ function PenseesSection() {
               {p.auteur && <div style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)' }}>{p.auteur}</div>}
             </Card>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ---------- Rencontres de prière à Montréal ----------
+function MontrealPrayerSection() {
+  return (
+    <section data-screen-label="Prière à Montréal" id="priere-montreal" style={{ scrollMarginTop: 76, background: 'var(--color-surface-sunken)' }}>
+      <div style={{ maxWidth: 1160, margin: '0 auto', padding: '80px 40px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
+        <Photo src={PHOTOS.choeurPriere} alt="Rencontre de prière" style={{ height: 360 }} />
+        <div>
+          <div style={{ font: 'var(--text-label-md)', letterSpacing: 'var(--tracking-label)', textTransform: 'uppercase', color: 'var(--color-accent)', marginBottom: 12 }}>
+            Vie de prière — Canada
+          </div>
+          <h2 style={{ font: 'var(--text-display-md)', color: 'var(--color-primary)', margin: '0 0 16px' }}>Rencontres de prière à Montréal</h2>
+          <p style={{ font: 'var(--text-body-md)', color: 'var(--color-text)', margin: '0 0 24px' }}>
+            À Montréal, la Fraternité se réunit chaque semaine pour un temps de prière commune,
+            ouvert à tous ceux qui désirent approfondir leur foi dans un esprit de fraternité.
+          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 28 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <Icon name="clock" size={18} color="var(--color-primary)" />
+              <span style={{ font: 'var(--text-body-md)', color: 'var(--color-text)' }}>Tous les vendredis à 19 h</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <Icon name="map-pin" size={18} color="var(--color-primary)" />
+              <span style={{ font: 'var(--text-body-md)', color: 'var(--color-text)' }}>Église Sainte-Thérèse-de-l'Enfant-Jésus, 8200 rue Saint-Hubert, Montréal</span>
+            </div>
+          </div>
+          <Button variant="primary" onClick={() => window.open(MEETING_MAPS_URL, '_blank', 'noopener,noreferrer')}>Voir l'itinéraire</Button>
         </div>
       </div>
     </section>
@@ -713,6 +742,7 @@ function App() {
       <CommunitiesSection />
       <BishopVisitSection />
       <ActivitiesSection />
+      <MontrealPrayerSection />
       <TestimonialsSection />
       <GallerySection />
       <DonateSection />
