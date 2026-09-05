@@ -124,6 +124,9 @@ function Photo({ src, alt, style, position = 'center', fit = 'cover' }) {
 const MEETING_ADDRESS = "Église Sainte-Thérèse-de-l'Enfant-Jésus, 8200 Rue St-Hubert, Montréal, QC H2P 1Z2";
 const MEETING_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MEETING_ADDRESS)}`;
 
+// ---------- Rencontre de prière hebdomadaire — Ouagadougou ----------
+const OUAGA_MEETING_MAPS_URL = "https://www.google.com/maps/search/?api=1&query=12.395047,-1.475796";
+
 function MeetingBanner() {
   return (
     <div style={{
@@ -418,6 +421,10 @@ function CommunitiesSection() {
       badge: 'Ouagadougou', title: 'Paroisse de Dassasgho, siège social',
       body: "Communauté mère de la Fraternité, rattachée à l'archidiocèse de Ouagadougou. La maison communautaire y sert de lieu de rencontre et de prière, et abrite le matériel des différents apostolats.",
       tone: 'green',
+      meeting: {
+        text: 'Rencontre de prière chaque vendredi soir, Chapelle Saint-Joseph du Bas-fond',
+        mapsUrl: OUAGA_MEETING_MAPS_URL,
+      },
     },
     banfora: {
       badge: 'Banfora', title: 'Paroisse du Très Saint Sacrement de Bounouna',
@@ -451,6 +458,15 @@ function CommunitiesSection() {
           <Badge tone="primary" style={{ marginBottom: 14 }}>{d.badge}</Badge>
           <h3 style={{ font: 'var(--text-display-md)', color: 'var(--color-text)', margin: '0 0 12px' }}>{d.title}</h3>
           <p style={{ font: 'var(--text-body-md)', color: 'var(--color-text-muted)', margin: 0, maxWidth: 720 }}>{d.body}</p>
+          {d.meeting && (
+            <div style={{ marginTop: 24, padding: 24, background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-lg)', maxWidth: 560 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+                <Icon name="clock" size={20} color="var(--color-primary)" />
+                <span style={{ font: 'var(--text-body-md)', color: 'var(--color-text)' }}>{d.meeting.text}</span>
+              </div>
+              <Button size="sm" variant="outline" onClick={() => window.open(d.meeting.mapsUrl, '_blank', 'noopener,noreferrer')}>Voir l'itinéraire</Button>
+            </div>
+          )}
         </div>
       </div>
     </section>
