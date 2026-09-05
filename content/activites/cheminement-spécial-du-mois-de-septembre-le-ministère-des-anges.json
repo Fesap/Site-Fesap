@@ -2,11 +2,10 @@
   "description": "**Thème :** « Daniel répondit : Mon Dieu a envoyé son ange qui a fermé la gueule des lions... » (Daniel 6,22)\n\n**Programme :** Chapelet, louange prophétique, enseignement, ministère des anges\n\n**Intervenants :** Modérateur Hermann Dayamba, et des prêtres invités\n\nViens expérimenter la puissance d'intervention des anges dans ta vie !",
   "titre": "CHEMINEMENT SPÉCIAL DU MOIS DE SEPTEMBRE: LE MINISTÈRE DES ANGES",
   "dates": [
-    "2026-09-11",
-    "2026-09-18",
-    "2026-09-25"
+    { "date": "2026-09-11", "heure": "19h à 21h" },
+    { "date": "2026-09-18", "heure": "19h à 21h" },
+    { "date": "2026-09-25", "heure": "19h à 21h" }
   ],
-  "heure": "19h à 21h ",
   "lieu": "PAROISSE SAINTE THÉRÈSE DE L’ENFANT JÉSUS 8200 Rue Saint-Hubert, Montréal, ",
   "image": "/assets/uploads/97580.jpg"
 }

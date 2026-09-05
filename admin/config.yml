@@ -21,14 +21,15 @@ collections:
     summary: "{{titre}}"
     fields:
       - { label: "Titre", name: "titre", widget: "string" }
-      - label: "Dates"
+      - label: "Dates et heures"
         name: "dates"
         widget: "list"
         required: true
         min: 1
-        summary: "{{fields.date}}"
-        field: { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false, date_format: "DD/MM/YYYY" }
-      - { label: "Heure (ex. 19h à 21h)", name: "heure", widget: "string", required: false }
+        summary: "{{fields.date}} — {{fields.heure}}"
+        fields:
+          - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false, date_format: "DD/MM/YYYY" }
+          - { label: "Heure (ex. 19h à 21h)", name: "heure", widget: "string", required: false }
       - { label: "Lieu", name: "lieu", widget: "string", required: false }
       - label: "Description"
         name: "description"
