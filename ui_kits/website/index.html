@@ -12,6 +12,7 @@
 <script src="https://unpkg.com/d3-array@3/dist/d3-array.min.js"></script>
 <script src="https://unpkg.com/d3-geo@3/dist/d3-geo.min.js"></script>
 <script src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
+<script src="https://unpkg.com/marked@11.1.1/marked.min.js"></script>
 <script src="../../_ds_bundle.js"></script>
 <style>
   * { box-sizing: border-box; }
@@ -19,6 +20,10 @@
   a { color: var(--color-primary); }
   a:hover { color: var(--color-primary-hover); }
   img { display: block; }
+  .rich-text p { margin: 0 0 10px; }
+  .rich-text p:last-child { margin-bottom: 0; }
+  .rich-text strong { color: var(--color-text); font-weight: 700; }
+  .rich-text ul, .rich-text ol { margin: 0 0 10px; padding-left: 20px; }
 </style>
 </head>
 <body>
@@ -62,6 +67,12 @@ function useCmsCollection(folder) {
     return () => { cancelled = true; };
   }, [folder]);
   return items;
+}
+
+// Convertit le texte enrichi (gras, listes, paragraphes) saisi dans l'admin en HTML.
+function renderMarkdown(text) {
+  if (!text) return '';
+  return window.marked ? window.marked.parse(text) : text;
 }
 
 function formatDateFr(iso) {
@@ -547,7 +558,7 @@ function EventsSection() {
           {sorted.map((e, i) => (
             <Card key={i} style={{ display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'flex-start' }}>
               {e.image && (
-                <Photo src={e.image} alt={e.titre} fit="contain" style={{ width: 180, height: 220, flexShrink: 0, background: 'var(--color-surface-sunken)' }} />
+                <Photo src={e.image} alt={e.titre} fit="contain" style={{ width: 260, height: 320, flexShrink: 0, background: 'var(--color-surface-sunken)' }} />
               )}
               <div style={{ flex: '1 1 260px' }}>
                 <div style={{ font: 'var(--text-display-md)', color: 'var(--color-primary)', marginBottom: 10 }}>{e.titre}</div>
@@ -567,7 +578,11 @@ function EventsSection() {
                   )}
                 </div>
                 {e.description && (
-                  <div style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', whiteSpace: 'pre-line', lineHeight: 1.7 }}>{e.description}</div>
+                  <div
+                    className="rich-text"
+                    style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', lineHeight: 1.7 }}
+                    dangerouslySetInnerHTML={{ __html: renderMarkdown(e.description) }}
+                  />
                 )}
               </div>
             </Card>
