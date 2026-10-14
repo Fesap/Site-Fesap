@@ -728,8 +728,8 @@ function TestimonialsSection() {
 // ---------- Faire un don ----------
 function DonateSection() {
   const numbers = [
-    { label: 'Burkina Faso', value: '+226 55 74 77 72' },
-    { label: 'Canada', value: '+1 514 261 7129' },
+    { label: 'Burkina Faso', value: '+226 55 74 77 72', tel: '+22655747772', wa: '22655747772' },
+    { label: 'Canada', value: '+1 514 261 7129', tel: '+15142617129', wa: '15142617129' },
   ];
   return (
     <section data-screen-label="Faire un don" id="don" style={{ scrollMarginTop: 76 }}>
@@ -747,12 +747,12 @@ function DonateSection() {
           {numbers.map((n) => (
             <Card key={n.value} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
               <div style={{ display: 'flex', gap: 8 }}>
-                <span style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <a href={`tel:${n.tel}`} aria-label={`Appeler le ${n.value}`} title="Appeler" style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Icon name="phone" color="#fff" size={22} />
-                </span>
-                <span style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--social-whatsapp)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                </a>
+                <a href={`https://wa.me/${n.wa}`} target="_blank" rel="noopener noreferrer" aria-label={`Écrire sur WhatsApp au ${n.value}`} title="WhatsApp" style={{ width: 48, height: 48, borderRadius: '50%', background: 'var(--social-whatsapp)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Icon name="message-circle" color="#fff" size={22} />
-                </span>
+                </a>
               </div>
               <Badge tone="outline">{n.label}</Badge>
               <div style={{ font: 'var(--text-body-strong)', color: 'var(--color-text)' }}>{n.value}</div>
