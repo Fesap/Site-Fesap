@@ -567,6 +567,51 @@ function GallerySection() {
   );
 }
 
+// ---------- Galerie de photos d'une publication (plusieurs images, agrandissement au clic) ----------
+function collectImages(item) {
+  const list = [];
+  if (item.image) list.push(item.image);
+  if (Array.isArray(item.images)) item.images.forEach((im) => { const src = typeof im === 'string' ? im : im && im.image; if (src) list.push(src); });
+  return list.filter((src, i) => list.indexOf(src) === i);
+}
+
+function ImageGallery({ images, alt }) {
+  const [open, setOpen] = React.useState(null);
+  if (!images || images.length === 0) return null;
+  const n = images.length;
+  const maxWidth = n === 1 ? 420 : n === 2 ? 640 : '100%';
+  return (
+    <>
+      <div style={{ columnCount: Math.min(n, 3), columnGap: 12, maxWidth, marginBottom: 20 }}>
+        {images.map((src, i) => (
+          <img
+            key={i}
+            src={src}
+            alt={`${alt} (${i + 1}/${n})`}
+            onClick={() => setOpen(i)}
+            style={{ display: 'block', width: '100%', height: 'auto', marginBottom: 12, borderRadius: 'var(--radius-md)', cursor: 'zoom-in', breakInside: 'avoid', boxShadow: 'var(--shadow-sm)' }}
+          />
+        ))}
+      </div>
+      {open !== null && (
+        <div
+          onClick={() => setOpen(null)}
+          style={{ position: 'fixed', inset: 0, background: 'rgba(20,12,6,0.88)', zIndex: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, cursor: 'zoom-out' }}
+        >
+          <img src={images[open]} alt={alt} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', borderRadius: 'var(--radius-md)' }} />
+          <button onClick={() => setOpen(null)} aria-label="Fermer" style={{ position: 'absolute', top: 16, right: 20, background: 'none', border: 'none', color: '#fff', fontSize: 36, cursor: 'pointer', lineHeight: 1 }}>×</button>
+          {n > 1 && (
+            <>
+              <button onClick={(ev) => { ev.stopPropagation(); setOpen((open - 1 + n) % n); }} aria-label="Photo précédente" style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.15)', border: 'none', color: '#fff', fontSize: 32, width: 48, height: 48, borderRadius: '50%', cursor: 'pointer' }}>‹</button>
+              <button onClick={(ev) => { ev.stopPropagation(); setOpen((open + 1) % n); }} aria-label="Photo suivante" style={{ position: 'absolute', right: 16, top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.15)', border: 'none', color: '#fff', fontSize: 32, width: 48, height: 48, borderRadius: '50%', cursor: 'pointer' }}>›</button>
+            </>
+          )}
+        </div>
+      )}
+    </>
+  );
+}
+
 // ---------- Événements (programme d'activités géré par l'administrateur) ----------
 function EventsSection() {
   const raw = useCmsCollection('activites');
@@ -589,33 +634,29 @@ function EventsSection() {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           {sorted.map((e, i) => (
-            <Card key={i} style={{ display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'flex-start' }}>
-              {e.image && (
-                <Photo src={e.image} alt={e.titre} fit="contain" style={{ width: 260, height: 320, flexShrink: 0, background: 'var(--color-surface-sunken)' }} />
-              )}
-              <div style={{ flex: '1 1 260px' }}>
-                <div style={{ font: 'var(--text-display-md)', color: 'var(--color-primary)', marginBottom: 10 }}>{e.titre}</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginBottom: 12 }}>
-                  {e._dates.map((d, di) => (
-                    <div key={di} style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: 6 }}>
-                      <Icon name="calendar" size={14} color="var(--color-text-muted)" />
-                      {formatDatesFr([d.date])}{d.heure ? ` · ${d.heure}` : ''}
-                    </div>
-                  ))}
-                  {e.lieu && (
-                    <div style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: 6 }}>
-                      <Icon name="map-pin" size={14} color="var(--color-text-muted)" />{e.lieu}
-                    </div>
-                  )}
-                </div>
-                {e.description && (
-                  <div
-                    className="rich-text"
-                    style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', lineHeight: 1.7 }}
-                    dangerouslySetInnerHTML={{ __html: renderMarkdown(e.description) }}
-                  />
+            <Card key={i}>
+              <div style={{ font: 'var(--text-display-md)', color: 'var(--color-primary)', marginBottom: 12, maxWidth: 820 }}>{e.titre}</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginBottom: 20 }}>
+                {e._dates.map((d, di) => (
+                  <div key={di} style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <Icon name="calendar" size={14} color="var(--color-text-muted)" />
+                    {formatDatesFr([d.date])}{d.heure ? ` · ${d.heure}` : ''}
+                  </div>
+                ))}
+                {e.lieu && (
+                  <div style={{ font: 'var(--text-body-sm)', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <Icon name="map-pin" size={14} color="var(--color-text-muted)" />{e.lieu}
+                  </div>
                 )}
               </div>
+              <ImageGallery images={collectImages(e)} alt={e.titre} />
+              {e.description && (
+                <div
+                  className="rich-text"
+                  style={{ font: 'var(--text-body-md)', color: 'var(--color-text-muted)', lineHeight: 1.75, maxWidth: 820 }}
+                  dangerouslySetInnerHTML={{ __html: renderMarkdown(e.description) }}
+                />
+              )}
             </Card>
           ))}
         </div>
@@ -639,9 +680,7 @@ function PenseesSection() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
           {sorted.map((p, i) => (
             <Card key={i}>
-              {p.image && (
-                <img src={p.image} alt={p.titre || 'Pensée'} style={{ width: '100%', height: 160, objectFit: 'cover', borderRadius: 'var(--radius-md)', marginBottom: 12 }} />
-              )}
+              <ImageGallery images={collectImages(p)} alt={p.titre || 'Pensée'} />
               <Icon name="quote" size={22} color="var(--color-accent)" style={{ marginBottom: 12 }} />
               {p.titre && <h4 style={{ font: 'var(--text-label-md)', color: 'var(--color-text)', margin: '0 0 8px' }}>{p.titre}</h4>}
               <p style={{ font: 'var(--text-body-md)', color: 'var(--color-text)', margin: '0 0 12px', fontStyle: 'italic' }}>{p.texte}</p>

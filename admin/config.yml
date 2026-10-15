@@ -38,7 +38,13 @@ collections:
         hint: "Utilisez le bouton Gras (B) pour mettre en évidence un mot, et Entrée deux fois pour aller à la ligne."
         buttons: ["bold", "italic", "bulleted-list", "numbered-list"]
         editor_components: []
-      - { label: "Affiche ou photo (facultatif)", name: "image", widget: "image", required: false }
+      - { label: "Affiche ou photo principale (facultatif)", name: "image", widget: "image", required: false }
+      - label: "Autres photos (facultatif)"
+        name: "images"
+        widget: "list"
+        required: false
+        hint: "Cliquez sur « Ajouter » pour chaque photo supplémentaire."
+        field: { label: "Photo", name: "image", widget: "image" }
 
   - name: "pensees"
     label: "Pensées"
@@ -56,7 +62,13 @@ collections:
       - { label: "Texte", name: "texte", widget: "text" }
       - { label: "Auteur ou référence (facultatif)", name: "auteur", widget: "string", required: false }
       - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false, date_format: "DD/MM/YYYY" }
-      - { label: "Image (facultatif)", name: "image", widget: "image", required: false }
+      - { label: "Image principale (facultatif)", name: "image", widget: "image", required: false }
+      - label: "Autres images (facultatif)"
+        name: "images"
+        widget: "list"
+        required: false
+        hint: "Cliquez sur « Ajouter » pour chaque image supplémentaire."
+        field: { label: "Image", name: "image", widget: "image" }
 
   - name: "galerie"
     label: "Galerie de photos"
